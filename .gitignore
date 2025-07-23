@@ -2,6 +2,7 @@
 *.zip
 *.npy
 *.mp4
-real-life-violence-situations-dataset/
+content/real-life-violence-situations-dataset/
 test_videos/
-
+kaggle.json
+.idea
