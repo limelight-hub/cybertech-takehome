@@ -67,9 +67,6 @@ curl -X POST -F "video=@your_video.mp4" -F "analysis_type=" http:frame_by_frame/
 
 ## Model Training: 
 - Everything is in the /models folder
-- Checkout the original work: [abduulrahmankhalid](https://github.com/abduulrahmankhalid/Real-Time-Violence-Detection/blob/main/Violence_Detection_MoBiLSTM.ipynb) 
-
-
-
+- Checkout the original work: [abduulrahmankhalid](https://github.com/abduulrahmankhalid/Real-Time-Violence-Detection/blob/main/Violence_Detection_MoBiLSTM.ipynb)
 
 ---
