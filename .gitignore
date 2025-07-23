@@ -1,0 +1,7 @@
+# Dataset files and folders
+*.zip
+*.npy
+*.mp4
+real-life-violence-situations-dataset/
+test_videos/
+
