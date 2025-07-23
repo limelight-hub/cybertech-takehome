@@ -1,28 +1,142 @@
-# Real Time Violence Detection using MobileNet and Bi-directional LSTM
-#### This repository is part of the Graduation Project for NTI Training - AI and IoT DEY Initiative. 
-### Kaggle Notebook : https://www.kaggle.com/code/abduulrahmankhalid/real-time-violence-detection-mobilenet-bi-lstm
+# Violence Detection API
 
-- ## In this Work, we proposed a real-time violence detector based on deep-learning methods.
-  #### The proposed model consists of a MobileNet Pretrained Model as a spatial feature extractor and Bidirectional LSTM as temporal relation learning method with a focus on the three-factor (overall generality - accuracy - fast response time). The suggested model achieved about 97% accuracy with speed of 16 frames/sec.
-  ![image](https://user-images.githubusercontent.com/76521677/192987124-6ab45fd6-aef9-4359-a795-c2bbebec674f.png)
+🧠 **AI-powered video analysis API for real-time violence detection**
 
+Uses MobileNet + BiLSTM neural network to analyze videos and detect violent content with confidence scores.
 
-- ## Expirements
-  ## We Implemented Two Prediction Functions To Test Our Model On
-  ### - First Function Perform Frame By Frame Prediction For The Video.
+## 🚀 Quick Start
 
-  ![Output-Test-Violence-Video](https://user-images.githubusercontent.com/76521677/192982850-07593c8d-a674-4f2f-a80d-924ae318a9d7.gif)
+### 1. Install Dependencies
 
-  ![Output-Test-NonViolence-Video](https://user-images.githubusercontent.com/76521677/192983491-64b20a82-326c-48cb-8932-8e59f8ccdbcc.gif)
+```bash
+pip install -r requirements.txt
+```
 
-  ### - Second Function Perform Prediction For The Whole Video.
+### 2. Add Your Model
 
-    ![image](https://user-images.githubusercontent.com/76521677/192984158-6b942c47-a0a3-409a-9b57-5795b3e548ad.png)
-    ![image](https://user-images.githubusercontent.com/76521677/192984193-2a0e11e5-6b2a-4b40-81bc-2227d52853c5.png)
+Place your trained model in this directory:
 
-- ## Conclusion
-  ### Our proposed MobileNetV2-BiLSTM variant provides the reportedly best results for the used dataset.
-  ### Despite the performance of our proposed model, it needs to be further validated with more standard datasets where identification of one to many or many to many violent activities including weapons are tough to detect.
+- `MoBiLSTM_model.h5` (legacy format)
+- `MoBiLSTM_model.keras` (modern format)
 
+### 3. Run the API
 
-- Refrences: [CNN-BiLSTM Model for Violence Detection in Smart Surveillance](https://link.springer.com/article/10.1007/s42979-020-00207-x#Sec15)
+```bash
+python app.py
+```
+
+### 4. Test the API
+
+```bash
+# Check if API is running
+curl http://localhost:5000/
+
+# Upload a video for analysis
+curl -X POST -F "video=@your_video.mp4" http://localhost:5000/api/detect
+```
+
+## 📖 Full Documentation
+
+See [API_DOCUMENTATION.md](API_DOCUMENTATION.md) for complete API reference including:
+
+- All endpoints with examples
+- Request/response formats
+- Error handling
+- Code examples in Python, JavaScript
+- Technical specifications
+
+## 🎯 Key Features
+
+- ✅ **Dual Format Support**: Works with both `.h5` and `.keras` model formats
+- ✅ **Two Analysis Modes**: Summary analysis or frame-by-frame with video output
+- ✅ **CORS Enabled**: Ready for web frontend integration
+- ✅ **Auto Model Detection**: Automatically finds and loads your model
+- ✅ **Comprehensive Logging**: Detailed error messages and processing info
+
+## 📡 Main Endpoints
+
+| Endpoint             | Method | Description                 |
+| -------------------- | ------ | --------------------------- |
+| `/`                  | GET    | Health check & model status |
+| `/api/detect`        | POST   | Analyze video for violence  |
+| `/api/download/{id}` | GET    | Download processed video    |
+| `/api/model/status`  | GET    | Model information           |
+
+## 🔧 Requirements
+
+- Python 3.8+
+- TensorFlow 2.13+
+- OpenCV
+- Flask
+
+## 📁 Project Structure
+
+```
+api/
+├── app.py                  # Main Flask application
+├── violence_detector.py    # AI model wrapper
+├── requirements.txt        # Dependencies
+├── API_DOCUMENTATION.md    # Full API docs
+├── uploads/               # Temporary file storage
+├── outputs/               # Processed videos
+└── MoBiLSTM_model.h5      # Your trained model (add this)
+```
+
+## 🚨 Troubleshooting
+
+**Model not loading?**
+
+- Ensure model file exists in this directory
+- Check file format (`.h5` or `.keras`)
+- Verify model was trained correctly
+
+**Video upload failing?**
+
+- Check video format (MP4, AVI, MOV, MKV, WMV, FLV)
+- Ensure file size under 500MB
+- Verify video is not corrupted
+
+**Getting errors?**
+
+- Check console logs for detailed error messages
+- Ensure all dependencies are installed
+- Try with a different video file
+
+## 💡 Usage Examples
+
+**Python:**
+
+```python
+import requests
+
+with open('video.mp4', 'rb') as f:
+    response = requests.post('http://localhost:5000/api/detect', files={'video': f})
+    result = response.json()
+    print(f"Violence detected: {result['result']['prediction']}")
+```
+
+**JavaScript:**
+
+```javascript
+const formData = new FormData();
+formData.append("video", videoFile);
+
+fetch("http://localhost:5000/api/detect", {
+  method: "POST",
+  body: formData,
+})
+  .then((r) => r.json())
+  .then(console.log);
+```
+
+## 🎓 Model Training
+
+If you don't have a trained model yet:
+
+1. **Download from Kaggle:** Use the original notebook's pre-trained model
+2. **Train yourself:** Run the `Violence_Detection_MoBiLSTM.ipynb` notebook
+3. **Save the model:** Add `MoBiLSTM_model.save('MoBiLSTM_model.h5')` after training
+
+---
+
+**Need help?** Check the [full documentation](API_DOCUMENTATION.md) or examine the console logs when running the API.

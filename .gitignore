@@ -4,5 +4,5 @@
 *.mp4
 content/real-life-violence-situations-dataset/
 test_videos/
-kaggle.json
+api/kaggle.json
 .idea
