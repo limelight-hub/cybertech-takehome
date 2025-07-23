@@ -25,6 +25,8 @@ Place your trained model in this directory:
 cd api
 uvicorn main:app --reload
 ```
+visit the docs at
+
 
 ### 4. Test the API
 
@@ -60,47 +62,7 @@ curl -X POST -F "video=@your_video.mp4" http://localhost:8000/api/detect
 - OpenCV
 - Flask
 
-## 📁 Project Structure
-
-```
-api/
-├── app.py                  # Main Flask application
-├── violence_detector.py    # AI model wrapper
-├── requirements.txt        # Dependencies
-├── API_DOCUMENTATION.md    # Full API docs
-├── uploads/               # Temporary file storage
-├── outputs/               # Processed videos
-└── MoBiLSTM_model.h5      # Your trained model (add this)
-```
-
-## 💡 Usage Examples
-
-**Python:**
-
-```python
-import requests
-
-with open('video.mp4', 'rb') as f:
-    response = requests.post('http://localhost:8000/api/detect', files={'video': f})
-    result = response.json()
-    print(f"Violence detected: {result['result']['prediction']}")
-```
-
-**JavaScript:**
-
-```javascript
-const formData = new FormData();
-formData.append("video", videoFile);
-
-fetch("http://localhost:8000/api/detect", {
-  method: "POST",
-  body: formData,
-})
-  .then((r) => r.json())
-  .then(console.log);
-```
-
-## 🎓 Model Training
+## Model Training
 
 If you don't have a trained model yet:
 
