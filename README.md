@@ -1,10 +1,10 @@
-# Violence Detection API
+# Violence Detection API 
 
-🧠 **AI-powered video analysis API for real-time violence detection**
+**AI-powered video analysis API for real-time violence detection**
 
 Uses MobileNet + BiLSTM neural network to analyze videos and detect violent content with confidence scores.
 
-## 🚀 Quick Start
+## Quick Start
 
 ### 1. Install Dependencies
 
@@ -22,36 +22,27 @@ Place your trained model in this directory:
 ### 3. Run the API
 
 ```bash
-python app.py
+cd api
+uvicorn main:app --reload
 ```
 
 ### 4. Test the API
 
 ```bash
 # Check if API is running
-curl http://localhost:5000/
+curl http://localhost:8000/
 
 # Upload a video for analysis
-curl -X POST -F "video=@your_video.mp4" http://localhost:5000/api/detect
+curl -X POST -F "video=@your_video.mp4" http://localhost:8000/api/detect
 ```
 
-## 📖 Full Documentation
+## Key Features
 
-See [API_DOCUMENTATION.md](API_DOCUMENTATION.md) for complete API reference including:
-
-- All endpoints with examples
-- Request/response formats
-- Error handling
-- Code examples in Python, JavaScript
-- Technical specifications
-
-## 🎯 Key Features
-
-- ✅ **Dual Format Support**: Works with both `.h5` and `.keras` model formats
-- ✅ **Two Analysis Modes**: Summary analysis or frame-by-frame with video output
-- ✅ **CORS Enabled**: Ready for web frontend integration
-- ✅ **Auto Model Detection**: Automatically finds and loads your model
-- ✅ **Comprehensive Logging**: Detailed error messages and processing info
+- **Dual Format Support**: Works with both `.h5` and `.keras` model formats
+- **Two Analysis Modes**: Summary analysis or frame-by-frame with video output
+- **CORS Enabled**: Ready for web frontend integration
+- **Auto Model Detection**: Automatically finds and loads your model
+- **Comprehensive Logging**: Detailed error messages and processing info
 
 ## 📡 Main Endpoints
 
@@ -82,26 +73,6 @@ api/
 └── MoBiLSTM_model.h5      # Your trained model (add this)
 ```
 
-## 🚨 Troubleshooting
-
-**Model not loading?**
-
-- Ensure model file exists in this directory
-- Check file format (`.h5` or `.keras`)
-- Verify model was trained correctly
-
-**Video upload failing?**
-
-- Check video format (MP4, AVI, MOV, MKV, WMV, FLV)
-- Ensure file size under 500MB
-- Verify video is not corrupted
-
-**Getting errors?**
-
-- Check console logs for detailed error messages
-- Ensure all dependencies are installed
-- Try with a different video file
-
 ## 💡 Usage Examples
 
 **Python:**
@@ -110,7 +81,7 @@ api/
 import requests
 
 with open('video.mp4', 'rb') as f:
-    response = requests.post('http://localhost:5000/api/detect', files={'video': f})
+    response = requests.post('http://localhost:8000/api/detect', files={'video': f})
     result = response.json()
     print(f"Violence detected: {result['result']['prediction']}")
 ```
@@ -121,7 +92,7 @@ with open('video.mp4', 'rb') as f:
 const formData = new FormData();
 formData.append("video", videoFile);
 
-fetch("http://localhost:5000/api/detect", {
+fetch("http://localhost:8000/api/detect", {
   method: "POST",
   body: formData,
 })
@@ -138,5 +109,3 @@ If you don't have a trained model yet:
 3. **Save the model:** Add `MoBiLSTM_model.save('MoBiLSTM_model.h5')` after training
 
 ---
-
-**Need help?** Check the [full documentation](API_DOCUMENTATION.md) or examine the console logs when running the API.
