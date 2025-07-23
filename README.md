@@ -4,6 +4,11 @@
 
 Uses MobileNet + BiLSTM neural network to analyze videos and detect violent content with confidence scores.
 
+## API Documentation
+Interactive API docs are available at:
+- Swagger UI: https://cybertech-takehome.onrender.com/docs
+- ReDoc: https://cybertech-takehome.onrender.com/redoc
+
 ## Quick Start
 
 ### 1. Install Dependencies
@@ -12,20 +17,12 @@ Uses MobileNet + BiLSTM neural network to analyze videos and detect violent cont
 pip install -r requirements.txt
 ```
 
-### 2. Add Your Model
-
-Place your trained model in this directory:
-
-- `MoBiLSTM_model.h5` (legacy format)
-- `MoBiLSTM_model.keras` (modern format)
-
 ### 3. Run the API
 
 ```bash
 cd api
 uvicorn main:app --reload
 ```
-visit the docs at
 
 
 ### 4. Test the API
@@ -34,8 +31,14 @@ visit the docs at
 # Check if API is running
 curl http://localhost:8000/
 
-# Upload a video for analysis
-curl -X POST -F "video=@your_video.mp4" http://localhost:8000/api/detect
+# Upload a video for analysis (default: summary)
+curl -X POST -F "video=@your_video.mp4" http://localhost:8000/api/detect 
+
+# or with analysis_type to specify
+curl -X POST -F "video=@your_video.mp4" -F "analysis_type=summary" http://localhost:8000/api/detect
+curl -X POST -F "video=@your_video.mp4" -F "analysis_type=" http:frame_by_frame//localhost:8000/api/detect
+
+
 ```
 
 ## Key Features
@@ -46,7 +49,7 @@ curl -X POST -F "video=@your_video.mp4" http://localhost:8000/api/detect
 - **Auto Model Detection**: Automatically finds and loads your model
 - **Comprehensive Logging**: Detailed error messages and processing info
 
-## 📡 Main Endpoints
+## Main Endpoints
 
 | Endpoint             | Method | Description                 |
 | -------------------- | ------ | --------------------------- |
@@ -55,19 +58,18 @@ curl -X POST -F "video=@your_video.mp4" http://localhost:8000/api/detect
 | `/api/download/{id}` | GET    | Download processed video    |
 | `/api/model/status`  | GET    | Model information           |
 
-## 🔧 Requirements
+## Requirements
 
 - Python 3.8+
 - TensorFlow 2.13+
 - OpenCV
-- Flask
+- FastAPI
 
-## Model Training
+## Model Training: 
+- Everything is in the /models folder
+- Checkout the original work: [abduulrahmankhalid](https://github.com/abduulrahmankhalid/Real-Time-Violence-Detection/blob/main/Violence_Detection_MoBiLSTM.ipynb) 
 
-If you don't have a trained model yet:
 
-1. **Download from Kaggle:** Use the original notebook's pre-trained model
-2. **Train yourself:** Run the `Violence_Detection_MoBiLSTM.ipynb` notebook
-3. **Save the model:** Add `MoBiLSTM_model.save('MoBiLSTM_model.h5')` after training
+
 
 ---
